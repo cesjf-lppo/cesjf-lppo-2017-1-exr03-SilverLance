@@ -7,6 +7,7 @@
         <title>Listagem de Reclamações</title>
     </head>
     <body>
+    <center>
         <h1>Listagem de Reclamações</h1>
         <table border="1">
             <tr>
@@ -26,5 +27,6 @@
                 </tr>
             </c:forEach>
         </table>
+    </center>
     </body>
 </html>

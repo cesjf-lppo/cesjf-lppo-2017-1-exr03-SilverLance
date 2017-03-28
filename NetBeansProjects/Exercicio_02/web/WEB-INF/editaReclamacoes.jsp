@@ -12,6 +12,7 @@
         <title>Edita Reclamacao</title>
     </head>
     <body>
+    <center>
         <h1>Edita Reclamacao</h1>
         <form method="post">
             <div><input type="hidden" name="id" value="${reclamacao.id}"/></div>
@@ -27,5 +28,6 @@
             </select></label></div>
             <div><input type="submit"/></div>
         </form>
+    </center>
     </body>
 </html>
