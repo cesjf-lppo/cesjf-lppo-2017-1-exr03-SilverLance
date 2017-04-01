@@ -33,10 +33,8 @@ public class NovoVisitante extends HttpServlet {
             throws ServletException, IOException {
         String nome = request.getParameter("nome");
         int idade = Integer.parseInt(request.getParameter("idade"));
-        long entrada = Date.parse(request.getParameter("entrada"));
-        long saida = Date.parse(request.getParameter("saida"));
 
-        Logger.getLogger(NovoVisitante.class.getName()).log(Level.INFO, "POST: " + nome + "" + idade + "" + entrada +"" + saida);
+        Logger.getLogger(NovoVisitante.class.getName()).log(Level.INFO, "POST: " + nome + "" + idade);
 
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
@@ -44,11 +42,9 @@ public class NovoVisitante extends HttpServlet {
             Connection conexao = DriverManager.getConnection(url, "usuario", "usuario");
             System.out.println("Conexao aberta com sucesso!");
 
-            String sql = "INSERT INTO visitante(nome, idade, entrada, saida) VALUES('"
-                    + nome + "', '"
-                    + idade + "', '"
-                    + entrada + "', '"
-                    + saida + "')";
+            String sql = "INSERT INTO visitante(nome, idade) VALUES('"
+                    + nome + "', "
+                    + idade + ")";
 
             Statement operacao = conexao.createStatement();
             operacao.executeUpdate(sql);
