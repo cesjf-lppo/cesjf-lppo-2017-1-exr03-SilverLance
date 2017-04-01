@@ -40,7 +40,7 @@ public class ListaVisitantesServlet extends HttpServlet {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             Connection conexao = DriverManager.getConnection("jdbc:derby://localhost:1527/lppo-2017-1", "usuario", "usuario");
             Statement operacao = conexao.createStatement();
-            ResultSet resultado = operacao.executeQuery("SELECT * FROM reclamacao");
+            ResultSet resultado = operacao.executeQuery("SELECT * FROM visitante");
             while(resultado.next()){
                 Visitante VisitanteAtual = new Visitante();
                 VisitanteAtual.setId(resultado.getLong("id"));
