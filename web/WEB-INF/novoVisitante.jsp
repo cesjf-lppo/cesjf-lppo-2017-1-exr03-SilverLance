@@ -15,12 +15,6 @@
             <label>Idade:
                 <input type="text" name="idade"/>
             </label>
-            <label>Entrada:
-                <input type="text" name="entrada"/>
-            </label>
-            <label>Saida:
-                <input type="text" name="saida"/>
-            </label>
             <input type="submit"/>
         </form>
     </center>
