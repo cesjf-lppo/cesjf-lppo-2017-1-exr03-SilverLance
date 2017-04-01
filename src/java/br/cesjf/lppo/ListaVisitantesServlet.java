@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,32 +24,30 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "ListaVisitantesServlet", urlPatterns = {"/lista.html"})
 public class ListaVisitantesServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        List<Visitante> visitante = new ArrayList<>();
+   private static SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    
 
-        try {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List <Visitante> visitantes = new ArrayList<>();
+        
+                try {
+
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             Connection conexao = DriverManager.getConnection("jdbc:derby://localhost:1527/lppo-2017-1", "usuario", "usuario");
             Statement operacao = conexao.createStatement();
             ResultSet resultado = operacao.executeQuery("SELECT * FROM visitante");
+
             while(resultado.next()){
-                Visitante VisitanteAtual = new Visitante();
-                VisitanteAtual.setId(resultado.getLong("id"));
-                VisitanteAtual.setNome(resultado.getString("nome"));
-                VisitanteAtual.setIdade(resultado.getInt("idade"));
-                VisitanteAtual.setEntrada(resultado.getTimestamp("entrada"));
-                VisitanteAtual.setSaida(resultado.getTimestamp("saida"));
-                visitante.add(VisitanteAtual);
+                Visitante visitante = new Visitante();
+                visitante.setId(resultado.getLong("Id"));
+                visitante.setNome(resultado.getString("nome"));
+                visitante.setIdade(resultado.getInt("idade"));
+                String d = data.format(resultado.getDate("entrada"));
+                visitante.setEntrada(resultado.getTimestamp("entrada"));
+                visitante.setSaida(resultado.getTimestamp("saida"));
+                visitantes.add(visitante);
             }
             
         } catch (ClassNotFoundException ex) {
@@ -56,9 +55,16 @@ public class ListaVisitantesServlet extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(ListaVisitantesServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        request.setAttribute("visitante", visitante);
+        request.setAttribute("visitante", visitantes);
         request.getRequestDispatcher("WEB-INF/listaVisitantes.jsp").forward(request, response);
+
+    }
+
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
     }
 
 }
