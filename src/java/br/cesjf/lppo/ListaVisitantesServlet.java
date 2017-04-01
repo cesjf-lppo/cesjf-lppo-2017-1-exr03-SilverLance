@@ -44,7 +44,7 @@ public class ListaVisitantesServlet extends HttpServlet {
                 visitante.setId(resultado.getLong("Id"));
                 visitante.setNome(resultado.getString("nome"));
                 visitante.setIdade(resultado.getInt("idade"));
-                String d = data.format(resultado.getDate("entrada"));
+                String date = data.format(resultado.getDate("entrada"));
                 visitante.setEntrada(resultado.getTimestamp("entrada"));
                 visitante.setSaida(resultado.getTimestamp("saida"));
                 visitantes.add(visitante);
