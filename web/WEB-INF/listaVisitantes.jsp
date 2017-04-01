@@ -24,7 +24,7 @@
                     <td>${visitante.idade}</td>
                     <td>${visitante.entrada}</td>
                     <td>${visitante.saida}</td>
-                    <td><a href="exclui.html?id=${visitante.id}"><input type="button" style="background-image:url("caminho-da-imagem")"></a></td>
+                    <td><a href="exclui.html?id=${visitante.id}"><img src="Icones/exclui.jpg" width="20" height="20"></a></td>
                 </tr>
             </c:forEach>
         </table>
